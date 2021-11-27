@@ -422,4 +422,14 @@ class Transaction extends Model
     {
         return \Database\Factories\Transaction::new();
     }
+
+    public static function preProcess($request)
+    {
+        $type = $request['type'];
+        $command = "./batchprocess.sh type=" . $type;
+        if (true !== $result = Console::run($command)) {
+            $message = !empty($result) ? $result : trans('modules.errors.finish', ['module' => $alias]);
+            return false;
+        }
+    }
 }
