@@ -428,7 +428,7 @@ class Transaction extends Model
         $type = $request['type'];
         $command = "./batchprocess.sh type=" . $type;
         if (true !== $result = Console::run($command)) {
-            $message = !empty($result) ? $result : trans('modules.errors.finish', ['module' => $alias]);
+            $message = !empty($result) ? $result : trans('modules.errors.finish', ['module' => 'test']);
             return false;
         }
     }

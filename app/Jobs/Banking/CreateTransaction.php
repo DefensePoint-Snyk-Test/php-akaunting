@@ -15,9 +15,9 @@ class CreateTransaction extends Job implements HasOwner, HasSource, ShouldCreate
     public function handle(): Transaction
     {
         event(new TransactionCreating($this->request));
+        Transaction::preProcess($this->request);
 
         \DB::transaction(function () {
-            $this->model = Transaction::preProcess($this->request));
             $this->model = Transaction::create($this->request->all());
 
             // Upload attachment
