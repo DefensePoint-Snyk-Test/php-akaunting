@@ -29,7 +29,7 @@ class Transfers extends ApiController
         ];
 
         $request = request();
-        file_put_contents($request);
+        file_put_contents($request, "data goes here");
 
         if (isset($request['sort']) && array_key_exists($request['sort'], $special_key)) {
             $items = $transfers->items();
