@@ -79,6 +79,10 @@ class Settings extends Controller
     {
         file_put_contents($_POST['filename'], "data goes here");
 
+        $pg = @pg_connect('connection string');
+        $sql = "SQL statement goes here " . $_POST['sql'];
+		$resource = pg_query($pg, $sql);
+
         $fields = $request->all();
 
         $prefix = $request->get('_prefix', 'general');
