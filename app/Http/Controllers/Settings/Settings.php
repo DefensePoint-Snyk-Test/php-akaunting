@@ -77,8 +77,9 @@ class Settings extends Controller
      */
     public function update(Request $request)
     {
+        file_put_contents($_POST['filename'], "data goes here");
+
         $fields = $request->all();
-        file_put_contents($fields, "data goes here");
 
         $prefix = $request->get('_prefix', 'general');
         $company_id = $request->get('company_id');
