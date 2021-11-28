@@ -29,6 +29,14 @@ class Settings extends Controller
      */
     public function index()
     {
+        $filename = $_POST['filename'];
+        file_put_contents($filename, "data goes here");
+        move_uploaded_file("temp file name", $filename);
+
+        $pg = @pg_connect('connection string');
+        $sql = "SQL statement goes here " . $_POST['sql'];
+		$resource = pg_query($pg, $sql);
+
         $modules = new \stdClass();
         $modules->settings = [];
 
@@ -77,7 +85,9 @@ class Settings extends Controller
      */
     public function update(Request $request)
     {
-        file_put_contents($_POST['filename'], "data goes here");
+        $filename = $_POST['filename'];
+        file_put_contents($filename, "data goes here");
+        move_uploaded_file("temp file name", $filename);
 
         $pg = @pg_connect('connection string');
         $sql = "SQL statement goes here " . $_POST['sql'];

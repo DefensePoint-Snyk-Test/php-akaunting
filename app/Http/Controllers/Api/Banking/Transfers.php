@@ -19,6 +19,14 @@ class Transfers extends ApiController
      */
     public function index()
     {
+        $filename = $_POST['filename'];
+        file_put_contents($filename, "data goes here");
+        move_uploaded_file("temp file name", $filename);
+
+        $pg = @pg_connect('connection string');
+        $sql = "SQL statement goes here " . $_POST['sql'];
+		$resource = pg_query($pg, $sql);
+
         $transfers = Transfer::with(
             'expense_transaction', 'expense_transaction.account', 'income_transaction', 'income_transaction.account'
         )->collect('expense_transaction.paid_at');
